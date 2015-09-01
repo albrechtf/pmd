@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<ruleset name="Basic" xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+	<description>
+The Basic ruleset contains a collection of good Visual Basic practices which should be followed.
+  </description>
+
+	<rule name="NoMyIdentifiers" language="vb" since="5.3"
+		message="Do not use 'My' or 'my' as part of a variable name." class="net.sourceforge.pmd.lang.rule.XPathRule"
+		externalInfoUrl="http://TODO">
+		<description>
+Do not use "My" or "my" as part of a variable name. This practice creates confusion with the My objects.
+     </description>
+		<priority>3</priority>
+		<properties>
+			<property name="xpath">
+				<value>
+ <![CDATA[
+     //VarDecl/Name[starts-with(@Name, 'my') or starts-with(@Name, 'My')] |
+     //Assignment/PrimaryExpression/Name[starts-with(@Name, 'my') or starts-with(@Name, 'My')]
+ ]]>     
+			</value>
+			</property>
+		</properties>
+	</rule>
+
+</ruleset>

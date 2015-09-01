@@ -1,0 +1,91 @@
+<project name="pmd-vb" default="alljavacc" basedir="../../..">
+
+    <property name="javacc-home.path" value="target/lib" />
+	<property name="grammar.home.path" value="defs" />
+	<property name="generated.path" value="${target}/net/sourceforge/pmd/lang/vb/ast" />
+	<property name="patch.home" value="src/gen/java-fragments/ast" />
+	<property name="base.node.extends.token" value="extends net.sourceforge.pmd.lang.vb.ast.VBNode" />
+
+    <target name="alljavacc"
+            description="Generates all JavaCC aspects within PMD Visual Basic Module"
+            depends="checkUpToDate,init,vbjjtree,cleanup">
+    	<!-- touch when all is done SUCCESSFULLY. -->
+    	<touch file="${target}/last-generated-timestamp"/>
+    </target>
+
+    <target name="checkUpToDate">
+        <uptodate property="javaccBuildNotRequired" targetfile="${target}/last-generated-timestamp">
+            <srcfiles dir="${grammar.home.path}" includes="*.jj*"/>
+        	<srcfiles dir="${patch.home}" includes="*.patch"/>
+        </uptodate>
+        <echo message="up to date check: javaccBuildNotRequired=${javaccBuildNotRequired}"/>
+    </target>
+
+    <target name="init" unless="javaccBuildNotRequired">
+    	<!-- check patch availability -->
+    	<exec executable="patch" failifexecutionfails="true" errorproperty="dummy.error" outputproperty="dummy.output" />
+    	
+        <mkdir dir="${javacc-home.path}" />
+        <copy file="${javacc.jar}" tofile="${javacc-home.path}/javacc.jar" />
+
+        <mkdir dir="${target}"/>
+    </target>
+
+    <target name="cleanup">
+        <delete dir="${javacc-home.path}" />
+    </target>
+
+    <target name="vbjjtree" description="Generates the VB parser and AST source files" unless="javaccBuildNotRequired">
+        <delete dir="${generated.path}" />
+        <mkdir dir="${generated.path}" />
+        <jjtree target="${grammar.home.path}/VisualBasic.jjt"
+                outputdirectory="${generated.path}"
+                javacchome="${javacc-home.path}" />
+    	
+        <javacc static="false"
+                target="${generated.path}/VisualBasic.jj"
+                outputdirectory="${generated.path}"
+                javacchome="${javacc-home.path}" />
+    	
+    	<!-- Simple replaces of SimpleNode with VBNode -->
+    	<replaceregexp file="${generated.path}/JJTVisualBasicParserState.java"
+    		match="([^A-Za-z])Node([^A-Za-z])" replace="\1VBNode\2" flags="g" />
+    	<replaceregexp file="${generated.path}/VisualBasicParser.java"
+    		match="([^A-Za-z])Node([^A-Za-z])" replace="\1VBNode\2" flags="g" />
+    	<replaceregexp file="${generated.path}/VisualBasicParserVisitor.java"
+    		match="SimpleNode" replace="VBNode" flags="g" />
+    	
+    	<!-- modify node class hierarchy -->
+    	<!-- ASTStatement -->
+    	<replace token="${base.node.extends.token}" value="extends ASTStatement">
+    		<fileset dir="${generated.path}">
+    			<include name="ASTAssignment.java" />
+    			<include name="ASTMethodCall.java" />
+    			<include name="ASTDeclaration.java" />
+    			<include name="ASTReDim.java" />
+    			<include name="ASTSetStatement.java" />
+    			<include name="ASTOnError.java" />
+    			<include name="ASTIfStatement.java" />
+    			<include name="ASTDoWhileStatement.java" />
+    			<include name="ASTWhileWendStatement.java" />
+    			<include name="ASTForEachStatement.java" />
+    			<include name="ASTForStatement.java" />
+    			<include name="ASTWithStatement.java" />
+    			<include name="ASTCaseStatement.java" />
+				<include name="ASTExitStatement.java" />
+			</fileset>
+    	</replace>
+    	
+    	<!-- apply patches to generated Java files. patch must be available on PATH. -->
+    	<patch patchfile="${patch.home}/Token.patch" originalfile="${generated.path}/Token.java" failonerror="true" />
+    	<patch patchfile="${patch.home}/ASTProcDeclaration.patch" originalfile="${generated.path}/ASTProcDeclaration.java" failonerror="true" />
+    	<patch patchfile="${patch.home}/ASTStatement.patch" originalfile="${generated.path}/ASTStatement.java" failonerror="true" />
+    	<patch patchfile="${patch.home}/ASTDoCondition.patch" originalfile="${generated.path}/ASTDoCondition.java" failonerror="true" />
+    	<patch patchfile="${patch.home}/ASTBinOp.patch" originalfile="${generated.path}/ASTBinOp.java" failonerror="true" />
+    	<patch patchfile="${patch.home}/ASTUnaryOp.patch" originalfile="${generated.path}/ASTUnaryOp.java" failonerror="true" />
+    	
+    	<!-- delete generated files which are not required. -->
+		<delete file="${generated.path}/Node.java" />
+    	<delete file="${generated.path}/SimpleNode.java" />
+    </target>
+</project>
