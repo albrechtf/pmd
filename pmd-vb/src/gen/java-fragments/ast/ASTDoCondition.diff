@@ -1,0 +1,12 @@
+*** target/generated-sources/com/github/albrechtf/pmd/lang/vb/ast/ASTDoCondition.java	Thu Sep  3 08:17:32 2015
+--- src/gen/java-customized-ast/ASTDoCondition.java	Thu Sep  3 08:19:59 2015
+***************
+*** 12,17 ****
+--- 12,18 ----
+      super(p, id);
+    }
+  
++   public boolean conditionWhile;  
+  
+    /** Accept the visitor. **/
+    public Object jjtAccept(VisualBasicParserVisitor visitor, Object data) {

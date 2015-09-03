@@ -1,0 +1,45 @@
+*** target/generated-sources/com/github/albrechtf/pmd/lang/vb/ast/Token.java	Thu Sep  3 08:17:33 2015
+--- src/gen/java-customized-ast/Token.java	Thu Sep  3 08:18:15 2015
+***************
+*** 14,19 ****
+--- 14,21 ----
+     * class changes.
+     */
+    private static final long serialVersionUID = 1L;
++   
++   static long nextSequence = 0;
+  
+    /**
+     * An integer that describes the kind of this token.  This numbering
+***************
+*** 59,64 ****
+--- 61,70 ----
+     * is no such token, this field is null.
+     */
+    public Token specialToken;
++   
++   public long sequence;
++   
++   public String currentLineNumberLabel = null;
+  
+    /**
+     * An optional attribute value of the Token.
+***************
+*** 75,81 ****
+    /**
+     * No-argument constructor
+     */
+!   public Token() {}
+  
+    /**
+     * Constructs a new token for the specified Image.
+--- 81,89 ----
+    /**
+     * No-argument constructor
+     */
+!   public Token() {
+!   	sequence = nextSequence++;
+!   }
+  
+    /**
+     * Constructs a new token for the specified Image.

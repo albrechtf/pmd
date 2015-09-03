@@ -1,0 +1,36 @@
+*** target/generated-sources/com/github/albrechtf/pmd/lang/vb/ast/ASTStatement.java	Thu Sep  3 08:17:32 2015
+--- src/gen/java-customized-ast/ASTStatement.java	Thu Sep  3 08:20:52 2015
+***************
+*** 12,17 ****
+--- 12,42 ----
+      super(p, id);
+    }
+  
++   private long lineNumber = 0;
++ 
++   public void setLineNumber(long l)
++   {
++ 	  lineNumber = l;
++   }
++ 
++   public void setLineNumber(String str)
++   {
++ 	try
++ 	{
++ 		lineNumber = Long.parseLong(str);
++ 	}
++ 	catch (Exception e)
++ 	{
++ 		lineNumber = 0;
++ 	}
++   }
++ 
++   public long getLineNumber()
++   {
++ 	  return lineNumber;
++   }
++ 
++   public boolean firstOnLine;
+  
+    /** Accept the visitor. **/
+    public Object jjtAccept(VisualBasicParserVisitor visitor, Object data) {

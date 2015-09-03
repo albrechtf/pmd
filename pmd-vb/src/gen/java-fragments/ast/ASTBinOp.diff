@@ -1,0 +1,21 @@
+*** target/generated-sources/com/github/albrechtf/pmd/lang/vb/ast/ASTBinOp.java	Thu Sep  3 08:17:32 2015
+--- src/gen/java-customized-ast/ASTBinOp.java	Thu Sep  3 08:19:17 2015
+***************
+*** 12,17 ****
+--- 12,27 ----
+      super(p, id);
+    }
+  
++   protected String op = null;
++   public String getOp()
++   {
++ 	  return op;
++   }
++ 
++   public void setOp(String op)
++   {
++ 	  this.op = op;
++   }  
+  
+    /** Accept the visitor. **/
+    public Object jjtAccept(VisualBasicParserVisitor visitor, Object data) {

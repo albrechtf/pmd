@@ -1,0 +1,12 @@
+*** target/generated-sources/com/github/albrechtf/pmd/lang/vb/ast/ASTUnaryOp.java	Thu Sep  3 08:17:32 2015
+--- src/gen/java-customized-ast/ASTUnaryOp.java	Thu Sep  3 08:21:24 2015
+***************
+*** 12,17 ****
+--- 12,18 ----
+      super(p, id);
+    }
+  
++   public String op;  
+  
+    /** Accept the visitor. **/
+    public Object jjtAccept(VisualBasicParserVisitor visitor, Object data) {

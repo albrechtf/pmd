@@ -1,0 +1,61 @@
+*** target/generated-sources/com/github/albrechtf/pmd/lang/vb/ast/ASTProcDeclaration.java	Thu Sep  3 08:12:24 2015
+--- src/gen/java-customized-ast/ASTProcDeclaration.java	Thu Sep  3 08:14:59 2015
+***************
+*** 11,16 ****
+--- 11,66 ----
+    public ASTProcDeclaration(VisualBasicParser p, int id) {
+      super(p, id);
+    }
++   
++ 	/**
++ 	**	The type of the procedure: Sub, Function, Property
++ 	*/
++ 	private int procType;
++ 	public void setProcType(int procType)
++ 	{
++ 		this.procType = procType;
++ 	}
++ 	public int getProcType()
++ 	{
++ 		return procType;
++ 	}
++ 
++ 	// The name is the first "child"
++ 	public String getName()
++ 	{
++ 		VBNode name = ((VBNode)jjtGetChild(0));
++ 		return name.getName();
++ 	}
++ 
++ 	// The formal parameter list (if any) will be second
++ 	public ASTFormalParamList getParams()
++ 	{
++ 		for (int i = 0; i < jjtGetNumChildren(); i++)
++ 		{
++ 			if (jjtGetChild(i) instanceof ASTFormalParamList)
++ 				return (ASTFormalParamList)jjtGetChild(i);
++ 		}
++ 
++ 		return null;
++ 	}
++ 
++ 	// The function return type (if any) is next.
++ 	public ASTTypeName getReturnType()
++ 	{
++ 		for (int i = 0; i < jjtGetNumChildren(); i++)
++ 		{
++ 			if (jjtGetChild(i) instanceof ASTTypeName)
++ 				return (ASTTypeName)jjtGetChild(i);
++ 		}
++ 
++ 		return null;
++ 	}
++ 
++ 	// The Statements are always the last entry
++ 	public ASTStatements getStatements()
++ 	{
++ 		return (ASTStatements)jjtGetChild(jjtGetNumChildren()-1);
++ 	}  
+  
+  
+    /** Accept the visitor. **/
