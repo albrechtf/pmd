@@ -8,7 +8,7 @@ The Basic ruleset contains a collection of good Visual Basic practices which sho
   </description>
 
 	<rule name="NoMyIdentifiers" language="vb" since="5.3"
-		message="Do not use 'My' or 'my' as part of a variable name." class="net.sourceforge.pmd.lang.rule.XPathRule"
+		message="Do not use 'My' or 'my' as part of a variable name" class="net.sourceforge.pmd.lang.rule.XPathRule"
 		externalInfoUrl="http://TODO">
 		<description>
 Do not use "My" or "my" as part of a variable name. This practice creates confusion with the My objects.

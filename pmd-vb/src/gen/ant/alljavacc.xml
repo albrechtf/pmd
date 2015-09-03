@@ -2,9 +2,9 @@
 
     <property name="javacc-home.path" value="target/lib" />
 	<property name="grammar.home.path" value="defs" />
-	<property name="generated.path" value="${target}/net/sourceforge/pmd/lang/vb/ast" />
+	<property name="generated.path" value="${target}/com/github/albrechtf/pmd/lang/vb/ast" />
 	<property name="patch.home" value="src/gen/java-fragments/ast" />
-	<property name="base.node.extends.token" value="extends net.sourceforge.pmd.lang.vb.ast.VBNode" />
+	<property name="base.node.extends.token" value="extends com.github.albrechtf.pmd.lang.vb.ast.VBNode" />
 
     <target name="alljavacc"
             description="Generates all JavaCC aspects within PMD Visual Basic Module"
@@ -83,7 +83,6 @@
     	<patch patchfile="${patch.home}/ASTDoCondition.patch" originalfile="${generated.path}/ASTDoCondition.java" failonerror="true" />
     	<patch patchfile="${patch.home}/ASTBinOp.patch" originalfile="${generated.path}/ASTBinOp.java" failonerror="true" />
     	<patch patchfile="${patch.home}/ASTUnaryOp.patch" originalfile="${generated.path}/ASTUnaryOp.java" failonerror="true" />
-    	
     	<!-- delete generated files which are not required. -->
 		<delete file="${generated.path}/Node.java" />
     	<delete file="${generated.path}/SimpleNode.java" />
