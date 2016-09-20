@@ -47,6 +47,10 @@
                 outputdirectory="${generated.path}"
                 javacchome="${javacc-home.path}" />
     	
+    	<!-- fix potential Windows line breaks -->
+    	<echo message="Fixing line endings in generated sources..."></echo>
+    	<fixcrlf srcdir="${generated.path}" eol="unix" />
+    	
     	<!-- Simple replaces of SimpleNode with VBNode -->
     	<replaceregexp file="${generated.path}/JJTVisualBasicParserState.java"
     		match="([^A-Za-z])Node([^A-Za-z])" replace="\1VBNode\2" flags="g" />
@@ -77,12 +81,12 @@
     	</replace>
     	
     	<!-- apply patches to generated Java files. patch must be available on PATH. -->
-    	<patch patchfile="${patch.home}/Token.diff" originalfile="${generated.path}/Token.java" failonerror="true" />
-    	<patch patchfile="${patch.home}/ASTProcDeclaration.diff" originalfile="${generated.path}/ASTProcDeclaration.java" failonerror="true" />
-    	<patch patchfile="${patch.home}/ASTStatement.diff" originalfile="${generated.path}/ASTStatement.java" failonerror="true" />
-    	<patch patchfile="${patch.home}/ASTDoCondition.diff" originalfile="${generated.path}/ASTDoCondition.java" failonerror="true" />
-    	<patch patchfile="${patch.home}/ASTBinOp.diff" originalfile="${generated.path}/ASTBinOp.java" failonerror="true" />
-    	<patch patchfile="${patch.home}/ASTUnaryOp.diff" originalfile="${generated.path}/ASTUnaryOp.java" failonerror="true" />
+    	<patch patchfile="${patch.home}/Token.diff" originalfile="${generated.path}/Token.java" failonerror="true" ignorewhitespace="true" />
+    	<patch patchfile="${patch.home}/ASTProcDeclaration.diff" originalfile="${generated.path}/ASTProcDeclaration.java" failonerror="true" ignorewhitespace="true" />
+    	<patch patchfile="${patch.home}/ASTStatement.diff" originalfile="${generated.path}/ASTStatement.java" failonerror="true" ignorewhitespace="true" />
+    	<patch patchfile="${patch.home}/ASTDoCondition.diff" originalfile="${generated.path}/ASTDoCondition.java" failonerror="true" ignorewhitespace="true" />
+    	<patch patchfile="${patch.home}/ASTBinOp.diff" originalfile="${generated.path}/ASTBinOp.java" failonerror="true" ignorewhitespace="true" />
+    	<patch patchfile="${patch.home}/ASTUnaryOp.diff" originalfile="${generated.path}/ASTUnaryOp.java" failonerror="true" ignorewhitespace="true" />
     	<!-- delete generated files which are not required. -->
 		<delete file="${generated.path}/Node.java" />
     	<delete file="${generated.path}/SimpleNode.java" />

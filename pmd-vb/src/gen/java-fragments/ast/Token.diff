@@ -1,5 +1,5 @@
-*** target/generated-sources/com/github/albrechtf/pmd/lang/vb/ast/Token.java	Thu Sep  3 08:17:33 2015
---- src/gen/java-customized-ast/Token.java	Thu Sep  3 08:18:15 2015
+*** target/generated-sources/com/github/albrechtf/pmd/lang/vb/ast/Token.java	2016-09-20 17:10:40.021078200 +0200
+--- src/gen/java-customized-ast/Token.java	2016-09-20 17:09:22.970278200 +0200
 ***************
 *** 14,19 ****
 --- 14,21 ----

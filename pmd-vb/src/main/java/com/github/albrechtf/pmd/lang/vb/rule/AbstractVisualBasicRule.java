@@ -2,13 +2,13 @@ package com.github.albrechtf.pmd.lang.vb.rule;
 
 import java.util.List;
 
-import com.github.albrechtf.pmd.lang.vb.VisualBasicLanguageModule;
-
 import net.sourceforge.pmd.RuleContext;
 import net.sourceforge.pmd.lang.LanguageRegistry;
 import net.sourceforge.pmd.lang.ast.Node;
 import net.sourceforge.pmd.lang.rule.AbstractRule;
 import net.sourceforge.pmd.lang.rule.ImmutableLanguage;
+
+import com.github.albrechtf.pmd.lang.vb.VisualBasicLanguageModule;
 import com.github.albrechtf.pmd.lang.vb.ast.ASTArgList;
 import com.github.albrechtf.pmd.lang.vb.ast.ASTArgSpec;
 import com.github.albrechtf.pmd.lang.vb.ast.ASTArguments;
@@ -34,6 +34,7 @@ import com.github.albrechtf.pmd.lang.vb.ast.ASTImplements;
 import com.github.albrechtf.pmd.lang.vb.ast.ASTLabel;
 import com.github.albrechtf.pmd.lang.vb.ast.ASTLiteral;
 import com.github.albrechtf.pmd.lang.vb.ast.ASTMethodCall;
+import com.github.albrechtf.pmd.lang.vb.ast.ASTModScopeDecl;
 import com.github.albrechtf.pmd.lang.vb.ast.ASTName;
 import com.github.albrechtf.pmd.lang.vb.ast.ASTOnError;
 import com.github.albrechtf.pmd.lang.vb.ast.ASTOption;
@@ -58,6 +59,7 @@ public abstract class AbstractVisualBasicRule extends AbstractRule implements Vi
 		super.setLanguage(LanguageRegistry.getLanguage(VisualBasicLanguageModule.NAME));
 	}
 
+	@Override
 	public void apply(List<? extends Node> nodes, RuleContext ctx) {
 		visitAll(nodes, ctx);
 	}
@@ -75,188 +77,234 @@ public abstract class AbstractVisualBasicRule extends AbstractRule implements Vi
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTProcDeclaration node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTStatements node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTStatement node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTAssignment node, Object data) {
 		return visit((ASTStatement)node, data);
 	}
 
+	@Override
 	public Object visit(ASTMethodCall node, Object data) {
 		return visit((ASTStatement)node, data);
 	}
 
+	@Override
 	public Object visit(ASTOption node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTDeclaration node, Object data) {
 		return visit((ASTStatement)node, data);
 	}
 
+	@Override
 	public Object visit(ASTReDim node, Object data) {
 		return visit((ASTStatement)node, data);
 	}
 
+	@Override
 	public Object visit(ASTEventDeclaration node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTDeclare node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTConstDeclaration node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTTypeDeclaration node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTEnumDeclaration node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTSetStatement node, Object data) {
 		return visit((ASTStatement)node, data);
 	}
 
+	@Override
 	public Object visit(ASTOnError node, Object data) {
 		return visit((ASTStatement)node, data);
 	}
 
+	@Override
 	public Object visit(ASTIfStatement node, Object data) {
 		return visit((ASTStatement)node, data);
 	}
 
+	@Override
 	public Object visit(ASTImplements node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTDoWhileStatement node, Object data) {
 		return visit((ASTStatement)node, data);
 	}
 
+	@Override
 	public Object visit(ASTDoCondition node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTWhileWendStatement node, Object data) {
 		return visit((ASTStatement)node, data);
 	}
 
+	@Override
 	public Object visit(ASTForEachStatement node, Object data) {
 		return visit((ASTStatement)node, data);
 	}
 
+	@Override
 	public Object visit(ASTForStatement node, Object data) {
 		return visit((ASTStatement)node, data);
 	}
 
+	@Override
 	public Object visit(ASTWithStatement node, Object data) {
 		return visit((ASTStatement)node, data);
 	}
 
+	@Override
 	public Object visit(ASTCaseStatement node, Object data) {
 		return visit((ASTStatement)node, data);
 	}
 
+	@Override
 	public Object visit(ASTArgList node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTExitStatement node, Object data) {
 		return visit((ASTStatement)node, data);
 	}
 
+	@Override
 	public Object visit(ASTName node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTExpression node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTBinOp node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTUnaryOp node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTPrimaryExpression node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTLiteral node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTLabel node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTTypeName node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTFormalParamList node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTVarDim node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTArgSpec node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTVarDecl node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTArguments node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}
 
+	@Override
 	public Object visit(ASTCaseExpr node, Object data) {
+		node.childrenAccept(this, data);
+		return data;
+	}
+
+	@Override
+	public Object visit(ASTModScopeDecl node, Object data) {
 		node.childrenAccept(this, data);
 		return data;
 	}

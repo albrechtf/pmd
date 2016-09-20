@@ -736,7 +736,7 @@ void ImplementsDecl() #Implements :
 	<IMPLEMENTS> TypeName()
 }
 
-void ModScopeDecl() :
+void ModScopeDecl() #ModScopeDecl :
 {}
 {
     ( <PUBLIC> | <PRIVATE> | <FRIEND> | <DIM> | <GLOBAL> ) [ <STATIC> ]

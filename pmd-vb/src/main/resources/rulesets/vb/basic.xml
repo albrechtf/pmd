@@ -25,5 +25,15 @@ Do not use "My" or "my" as part of a variable name. This practice creates confus
 			</property>
 		</properties>
 	</rule>
+	
+	<rule name="ConsistentKeywords" language="vb" since="5.3" class="com.github.albrechtf.pmd.lang.vb.rule.ConsistentKeywordRule"
+		externalInfoUrl="https://msdn.microsoft.com/en-us/library/ksh7h19t%28v=vs.90%29.aspx">
+		<description>
+			Use consistent case for keywords for better code reading. 
+			Refer to https://msdn.microsoft.com/en-us/library/ksh7h19t%28v=vs.90%29.aspx for how the keywords should be written.
+	    </description>
+		<priority>3</priority>
+	</rule>
+	
 
 </ruleset>

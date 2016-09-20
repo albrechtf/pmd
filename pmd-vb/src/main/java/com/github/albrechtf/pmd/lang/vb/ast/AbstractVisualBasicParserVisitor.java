@@ -43,7 +43,6 @@ import com.github.albrechtf.pmd.lang.vb.ast.ASTWhileWendStatement;
 import com.github.albrechtf.pmd.lang.vb.ast.ASTWithStatement;
 import com.github.albrechtf.pmd.lang.vb.ast.VisualBasicParserVisitor;
 
-
 public abstract class AbstractVisualBasicParserVisitor implements VisualBasicParserVisitor
 {
 	public Object visit(VBNode node, Object data) {
@@ -99,6 +98,7 @@ public abstract class AbstractVisualBasicParserVisitor implements VisualBasicPar
   public Object visit(ASTVarDecl node, Object data){ node.childrenAccept(this, data); return data; }
   public Object visit(ASTArguments node, Object data){ node.childrenAccept(this, data); return data; }
   public Object visit(ASTCaseExpr node, Object data){ node.childrenAccept(this, data); return data; }
+  public Object visit(ASTModScopeDecl node, Object data) { node.childrenAccept(this, data); return data; }
 
   public void start() { }
   public void end() { }
